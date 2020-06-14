@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MsgTool</string>
+    <string name="add">add</string>
+    <string name="start_stop">start/stop</string>
+    <string name="phonenumber">phoneNumber</string>
+    <string name="ready">Ready!</string>
+</resources>
