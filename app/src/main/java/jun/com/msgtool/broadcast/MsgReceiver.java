@@ -27,7 +27,7 @@ public class MsgReceiver extends BroadcastReceiver {
             String address = message.getOriginatingAddress();
             // 获取短信内容
             String messageBody = message.getMessageBody();
-            Toast.makeText(x.app(), "来自:" + address + "内容:" + messageBody, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(x.app(), "来自:" + address + "内容:" + messageBody, Toast.LENGTH_SHORT).show();
             if (Myapplication.isPlay) {
                 //转发
                 if (messageBody.contains(content_like)) {
@@ -45,7 +45,10 @@ public class MsgReceiver extends BroadcastReceiver {
         List<PhoneNumber> phoneNum = db.selector(PhoneNumber.class).findAll();
         if (phoneNum != null && phoneNum.size() > 0) {
             for (PhoneNumber number : phoneNum) {
-                sendMsg(number.getNumber(), content);
+                //指定老师
+                if(content.contains(number.getTeacher())) {
+                    sendMsg(number.getNumber(), content);
+                }
             }
         } else {
             Toast.makeText(x.app(), "手机号列表为空", Toast.LENGTH_SHORT).show();

@@ -60,13 +60,18 @@ public class MainActivity extends AppCompatActivity {
                 //添加手机号
                 List<PhoneNumber> numbers = new ArrayList<>();
                 PhoneNumber number = new PhoneNumber();
-                String phoneNumText = editText.getText().toString();
+                //提取后11位
+                String phoneText = editText.getText().toString();
+                String teacherName = phoneText.substring(0, phoneText.length() - 11);
+                String phoneNumText = phoneText.substring(phoneText.length() - 11);
+                //添加的时候注意用前缀来区分老师:  宋杰12345678901
                 if (phoneNumText.equals("") || !validateMobilePhone(phoneNumText)) {
-                    if (phoneNumText.contains("set"))
+                    if (phoneNumText.contains("set-"))
                         content_like = phoneNumText.replace("set", "");
                     else Toast.makeText(MainActivity.this, "请输入正确手机号", Toast.LENGTH_SHORT).show();
                 } else {
                     number.setNumber(editText.getText().toString());
+                    number.setTeacher(teacherName);
                     numbers.add(number);
                     try {
                         db.save(numbers);
@@ -114,10 +119,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //校验手机号
-    private boolean validateMobilePhone(String in) {
+    private static boolean validateMobilePhone(String in) {
         Pattern pattern = Pattern.compile("^[1]\\d{10}$");
         return pattern.matcher(in).matches();
     }
+
 
     //动态权限申请
 }

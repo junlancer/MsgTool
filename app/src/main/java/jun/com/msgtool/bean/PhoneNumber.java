@@ -9,6 +9,8 @@ public class PhoneNumber {
     private int id;
     @Column(name = "Number")
     private String Number;
+    @Column(name = "teacher")
+    private String teacher;
 
     public int getId() {
         return id;
@@ -26,8 +28,16 @@ public class PhoneNumber {
         Number = number;
     }
 
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
+    }
+
     @Override
     public String toString() {
-        return "PhoneNumber: " + Number;
+        return teacher + Number;
     }
 }
